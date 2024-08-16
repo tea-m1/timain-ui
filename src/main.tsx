@@ -8,6 +8,13 @@ import "../index.css";
 import {Biodiversite} from "./pages/biodiversite/Biodiversite";
 import {Plante} from "./pages/biodiversite/plante/Plante";
 import {Animal} from "./pages/biodiversite/animal";
+import AOS from "aos";
+import Place from "./pages/biodiversite/place/Place";
+
+AOS.init({
+  duration: 1000,
+  once: true,
+});
 
 const ROUTER = createBrowserRouter([
   {
@@ -25,6 +32,10 @@ const ROUTER = createBrowserRouter([
   {
     path: "/biodiversite/animal",
     element: <Animal />,
+  },
+  {
+    path: "/biodiversite/space",
+    element: <Place />,
   },
   {
     path: "/biodiversite/plante",

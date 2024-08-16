@@ -71,7 +71,7 @@ export const CommunityPostCard: React.FC<CommunityPostCardProps> = ({
           <Tag tag="moka" />
           <Tag tag="moka" />
           <Tag tag="moka" />
-          <Tag tag="moka" />
+          <Tag tag="tsymocka" />
         </div>
         <MarkdownReader>{text}</MarkdownReader>
       </CardContent>

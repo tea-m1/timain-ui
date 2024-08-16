@@ -1,9 +1,13 @@
-import {Datagrid, List} from "react-admin";
+import {Datagrid, List, TextField} from "react-admin";
 
 export const SpecieList = () => {
   return (
-    <List>
-      <Datagrid></Datagrid>
+    <List pagination={false}>
+      <Datagrid>
+        <TextField source="scientificName" label="Scientific name" />
+        <TextField source="type" />
+        <TextField source="description" />
+      </Datagrid>
     </List>
   );
 };

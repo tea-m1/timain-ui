@@ -10,7 +10,10 @@ import {authenticationApi, unwrap} from "./api";
 export const whoami = async () => {};
 
 export const authProvider: TimAuthProvider = {
-  login: (userLogin: UserLogin) => authenticationApi().login(userLogin),
+  login: async (userLogin: UserLogin) => {
+    const token = await unwrap(() => authenticationApi().login(userLogin));
+    authTokenCache.replace(token as any);
+  },
   whoami: async () => {
     const whoami = await unwrap(() => authenticationApi().whoami());
     return whoamiCache.replace(whoami);
@@ -29,10 +32,11 @@ export const authProvider: TimAuthProvider = {
   getCachedWhoami: whoamiCache.get,
   getCachedAuthConf: () => {
     const token = authTokenCache.get();
+    console.log("token", token);
     return new Configuration({
       baseOptions: {
         headers: {
-          Authorization: `Bearer ${token?.access ?? ""}`,
+          Authorization: `Bearer ${token?.access_token ?? ""}`,
         },
       },
     });

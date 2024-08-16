@@ -1,9 +1,13 @@
 import {BiodiversityApi, AccountApi, AuthenticationApi} from "@/gen";
 import {AxiosResponse} from "axios";
+import {authProvider} from "./authProvider";
 
-export const biodiversityApi = () => new BiodiversityApi();
-export const accountApi = () => new AccountApi();
-export const authenticationApi = () => new AuthenticationApi();
+export const biodiversityApi = () =>
+  new BiodiversityApi(authProvider.getCachedAuthConf());
+export const accountApi = () =>
+  new AccountApi(authProvider.getCachedAuthConf());
+export const authenticationApi = () =>
+  new AuthenticationApi(authProvider.getCachedAuthConf());
 
 /* unwrap response */
 export type UnwrapResult<TReturn extends () => Promise<AxiosResponse<any>>> =

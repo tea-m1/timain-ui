@@ -35,7 +35,7 @@ const inLocalStorage = <T>(key: string) =>
   createObjectCacher<T>(key, () => localStorage);
 
 export const authTokenCache =
-  inLocalStorage<ToRecord<TokenPair>>("auth_tokens");
+  inLocalStorage<ToRecord<{access_token: string}>>("auth_tokens");
 export const whoamiCache = inLocalStorage<Whoami>("whoami");
 
 export const clearCaches = () => {

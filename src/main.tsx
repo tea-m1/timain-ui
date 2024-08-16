@@ -12,6 +12,7 @@ import AOS from "aos";
 import PlacePage from "./pages/biodiversite/place/PlacePage";
 import RegisterForm from "./pages/auth/register-form";
 import LoginForm from "./pages/auth/login-form";
+import {TimainAdmin} from "./pages/admin";
 
 AOS.init({
   duration: 1000,
@@ -50,6 +51,10 @@ const ROUTER = createBrowserRouter([
   {
     path: "/login",
     element: <LoginForm />,
+  },
+  {
+    path: "/admin/*",
+    element: <TimainAdmin />,
   },
 ]);
 

@@ -15,10 +15,13 @@ import {useForm} from "react-hook-form";
 import {Input} from "../../components/ui/input";
 import {Button} from "../../components/ui/button";
 import {z} from "zod";
-import {useState} from "react";
+import {authProvider} from "@/features/admin/providers/authProvider";
+import {useMutation, useQuery} from "@tanstack/react-query";
+import {UserLogin} from "@/gen";
+import {useNavigate} from "react-router-dom";
 
 const LoginForm = () => {
-  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const form = useForm({
     resolver: zodResolver(LoginSchema),
@@ -28,9 +31,16 @@ const LoginForm = () => {
     },
   });
 
-  const onSubmit = (data: z.infer<typeof LoginSchema>) => {
-    setLoading(true);
-    console.log(data);
+  const {mutateAsync: loginUser, isPending} = useMutation({
+    mutationKey: ["login"],
+    mutationFn: (u: UserLogin) => authProvider.login(u),
+  });
+
+  const onSubmit = async (data: z.infer<typeof LoginSchema>) => {
+    try {
+      await loginUser(data);
+      navigate("/");
+    } catch (e) {}
   };
 
   return (
@@ -75,8 +85,8 @@ const LoginForm = () => {
                 )}
               />
             </div>
-            <Button type="submit" className="w-full">
-              {loading ? "Loading..." : "Login"}
+            <Button isLoading={isPending} type="submit" className="w-full">
+              Login
             </Button>
           </form>
         </Form>

@@ -10,36 +10,67 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {useForm} from "react-hook-form";
+import {SubmitHandler, useForm} from "react-hook-form";
 import {Input} from "../../components/ui/input";
 import {Button} from "../../components/ui/button";
 import {z} from "zod";
 import {useState} from "react";
 import {RegisterSchema} from "./register-shema.ts";
+import {useMutation} from "@tanstack/react-query";
+import {accountProvider} from "@/features/admin/providers/accountProvider.ts";
+import {v4 as uuid} from "uuid";
+import {CreateUser, CreateUserGenderEnum, UserRole} from "@/gen/api.ts";
+import axios from "axios";
+import {unwrap} from "@/features/admin/providers/api.ts";
 
 const RegisterForm = () => {
   const [loading, setLoading] = useState(false);
   const form = useForm({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
+      lastName: "",
+      firstName: "",
       email: "",
-      name: "",
+      address: "",
       password: "",
       confirmPassword: "",
-      firstName: "",
-      lastName: "",
+      username: "",
       phone: "",
-      address: "",
       gender: "Male",
-      birthDate: "",
-      birthPlace: "",
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof RegisterSchema>) => {
+  const {mutateAsync: saveUser} = useMutation({
+    mutationKey: ["create-account"],
+    mutationFn: (user: CreateUser) => accountProvider.save(user),
+  });
+
+  const onSubmit: SubmitHandler<z.infer<typeof RegisterSchema>> = async (
+    data
+  ) => {
     setLoading(true);
     try {
-      await submitUserData(data);
+      const {confirmPassword, ...user} = data;
+
+      // await saveUser({
+      //   id: uuid(),
+      //   ...user,
+      //   gender: user.gender as CreateUserGenderEnum,
+      //   registrationDate: new Date(),
+      // });
+
+      await unwrap(() =>
+        axios.post(`${process.env.API_BASE_URL}/auth/signup`, {
+          id: uuid(),
+          ...user,
+          role: UserRole.USER,
+          gender: user.gender.toUpperCase() as CreateUserGenderEnum,
+          registrationDate: new Date(),
+          birthPlace: "place",
+          birthDate: new Date(),
+        })
+      );
+
       setLoading(false);
       console.log("User registered successfully");
     } catch (error) {
@@ -47,23 +78,6 @@ const RegisterForm = () => {
       console.error("Failed to register user:", error);
     }
   };
-
-  async function submitUserData(userData: z.infer<typeof RegisterSchema>) {
-    const response = await fetch("/api/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    });
-
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-
-    const newUser = await response.json();
-    return newUser;
-  }
 
   return (
     <div className="flex min-h-screen items-center justify-center">
@@ -88,19 +102,6 @@ const RegisterForm = () => {
                         type="email"
                         placeholder="jo@gmail.com"
                       />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="name"
-                render={({field}) => (
-                  <FormItem>
-                    <FormLabel>Name</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="Jo" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -137,7 +138,7 @@ const RegisterForm = () => {
                 name="phone"
                 render={({field}) => (
                   <FormItem>
-                    <FormLabel>Phone</FormLabel>
+                    <FormLabel>Téléphone</FormLabel>
                     <FormControl>
                       <Input {...field} type="tel" placeholder="+1234567890" />
                     </FormControl>
@@ -150,7 +151,7 @@ const RegisterForm = () => {
                 name="address"
                 render={({field}) => (
                   <FormItem>
-                    <FormLabel>Address</FormLabel>
+                    <FormLabel>Adresse</FormLabel>
                     <FormControl>
                       <Input {...field} placeholder="123 Main St" />
                     </FormControl>
@@ -163,38 +164,12 @@ const RegisterForm = () => {
                 name="gender"
                 render={({field}) => (
                   <FormItem>
-                    <FormLabel>Gender</FormLabel>
+                    <FormLabel>Genre</FormLabel>
                     <FormControl>
                       <select {...field} className="input">
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                       </select>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="birthDate"
-                render={({field}) => (
-                  <FormItem>
-                    <FormLabel>Birth Date</FormLabel>
-                    <FormControl>
-                      <Input {...field} type="date" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="birthPlace"
-                render={({field}) => (
-                  <FormItem>
-                    <FormLabel>Birth Place</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="City, Country" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

@@ -1,27 +1,21 @@
-import {FC} from "react";
-import {useQuery} from "@tanstack/react-query";
+import {HomePage} from "@/features/home/HomePage";
+import {Navbar} from "@/features/home/Navbar";
 
-export const Home: FC = () => {
-  const {data: users, isFetching} = useQuery<Record<string, any>[]>({
-    placeholderData: [],
-    queryKey: ["users"],
-    queryFn: async () => {
-      const res = await fetch("https://jsonplaceholder.typicode.com/users");
-      return res.json();
-    },
-  });
-
+export function Home() {
   return (
-    <div className="p-3">
-      {isFetching && <span>loading...</span>}
-      {users && users.map((user) => (
-        <div key={user.id}>
-          <div className="font-bold">{user.username}</div>
-          <div>{user.email}</div>
-          <hr className="text-muted" />
-        </div>
-      ))}
-      <h1>timain works</h1>
+    <div className="relative h-screen">
+      {/* Image de fond floutée */}
+      <div
+        className="absolute inset-0 bg-green-900 bg-cover bg-center bg-no-repeat"
+        style={{
+          filter: "blur(3px)",
+        }}
+      />
+      {/* Contenu superposé */}
+      <div className="relative z-10 h-screen overflow-hidden">
+        <Navbar />
+        <HomePage />
+      </div>
     </div>
   );
-};
+}

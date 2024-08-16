@@ -2,14 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import {RouterProvider, createBrowserRouter} from "react-router-dom";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-import {Home} from "@/pages/home";
+import {HomePage} from "@/pages/home/HomePage";
 import {Community} from "@/pages/community";
 import "../index.css";
 import {Biodiversite} from "./pages/biodiversite/Biodiversite";
-import {Plante} from "./pages/biodiversite/plante/Plante";
-import {Animal} from "./pages/biodiversite/animal";
+import {PlantePage} from "./pages/biodiversite/plante/PlantePage";
+import {AnimalPage} from "./pages/biodiversite/animal/AnimalPage";
 import AOS from "aos";
-import Place from "./pages/biodiversite/place/Place";
+import PlacePage from "./pages/biodiversite/place/PlacePage";
 
 AOS.init({
   duration: 1000,
@@ -19,7 +19,7 @@ AOS.init({
 const ROUTER = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <HomePage />,
   },
   {
     path: "/community",
@@ -27,19 +27,19 @@ const ROUTER = createBrowserRouter([
   },
   {
     path: "/biodiversite",
+    element: <PlacePage />,
+  },
+  {
+    path: "/biodiversite/alive",
     element: <Biodiversite />,
   },
   {
     path: "/biodiversite/animal",
-    element: <Animal />,
-  },
-  {
-    path: "/biodiversite/space",
-    element: <Place />,
+    element: <AnimalPage />,
   },
   {
     path: "/biodiversite/plante",
-    element: <Plante />,
+    element: <PlantePage />,
   },
 ]);
 

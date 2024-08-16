@@ -7,7 +7,7 @@ import {
   CardDescription,
   CardFooter,
 } from "@/components/ui/card";
-import "aos/dist/aos.css"; // Importer les styles d'AOS
+import "aos/dist/aos.css";
 
 interface AnimalCardProps {
   image: string;

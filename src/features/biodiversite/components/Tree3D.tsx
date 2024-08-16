@@ -51,10 +51,10 @@ export const Tree3D: React.FC = () => {
     <Canvas
       camera={{
         position: [0, 8, 10],
-        fov: 10,
+        fov: 2,
       }}
     >
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={0.8} />
       <directionalLight position={[0, 0, 10]} intensity={0.5} />
       <Suspense fallback={null}>
         <FoxModel mouseX={mouseX} autoRotate={autoRotate} />

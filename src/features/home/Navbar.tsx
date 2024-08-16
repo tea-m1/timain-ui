@@ -2,16 +2,18 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import {Avatar, AvatarImage, AvatarFallback} from "@/components/ui/avatar";
 import {Link} from "react-router-dom";
 import {Button} from "@/components/ui/button";
-import NatgeoLogo from "../../assets/logo.png";
-
+import Logo from "../../assets/Logo.jpeg";
 export function Navbar() {
   return (
-    <nav className="bg-green-900 p-4">
+    <nav className="bg-gradient-to-r from-[#215048] via-[#557D56] to-[#8FB673] p-4">
       <div className="container mx-auto flex items-center justify-between">
         <div>
-          <img src={NatgeoLogo} alt="Logo" className="h-[6vh] " />
+          <img src={Logo} alt="Logo" className="h-[6vh] rounded-full" />
         </div>
-        <div className="flex flex-1 justify-center space-x-12 font-bold">
+        <div
+          className="flex flex-1 justify-center space-x-12 font-bold"
+          style={{marginLeft: "-25%"}}
+        >
           <Link
             to="/"
             className="text-white transition-all duration-300 hover:text-gray-400"
@@ -25,16 +27,10 @@ export function Navbar() {
             Biodiversite
           </Link>
           <Link
-            to="/services"
+            to="/community"
             className="text-white transition-all duration-300 hover:text-gray-400"
           >
             Communite
-          </Link>
-          <Link
-            to="/contact"
-            className="text-white transition-all duration-300 hover:text-gray-400"
-          >
-            Contact
           </Link>
         </div>
         <div>

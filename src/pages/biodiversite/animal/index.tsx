@@ -1,1 +1,1 @@
-export * from "./Animal";
+export * from "./AnimalPage";

@@ -48,8 +48,12 @@ export function Navbar() {
             </DropdownMenu.Trigger>
             <DropdownMenu.Content
               align="end"
-              className="rounded-md bg-white p-2 text-black shadow-lg"
+              className="z-[100] rounded-md bg-white p-2 text-black shadow-lg"
             >
+              <DropdownMenu.Item className=" cursor-pointer rounded-md p-2 hover:bg-gray-200">
+                <Link to="/admin">Administration</Link>
+              </DropdownMenu.Item>
+              <hr />
               <DropdownMenu.Item className="cursor-pointer rounded-md p-2 hover:bg-gray-200">
                 Logout
               </DropdownMenu.Item>

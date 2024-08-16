@@ -68,7 +68,7 @@ const UserMenu: React.FC = () => {
             </Typography>
 
             <Box mt={0.5}>
-              <Chip label={user.} size="small" color="primary" />
+              <Chip label={(user as any)?.role} size="small" color="primary" />
             </Box>
           </Stack>
         </Stack>

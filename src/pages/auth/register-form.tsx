@@ -66,13 +66,15 @@ const RegisterForm = () => {
   }
 
   return (
-    <CardWrapper
+    <div className="flex justify-center items-center min-h-screen">
+      <CardWrapper
       label="Create an account"
       title="Register"
-      backButtonHref="/auth/login"
+      backButtonHref="/login"
       backButtonLabel="Already have an account? Login here."
-    >
-      <Form {...form}>
+      
+      >
+      <Form {...form} >
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-4">
             <FormField
@@ -228,6 +230,8 @@ const RegisterForm = () => {
         </form>
       </Form>
     </CardWrapper>
+    </div>
+   
   );
 };
 

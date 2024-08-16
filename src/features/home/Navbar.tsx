@@ -1,12 +1,12 @@
-import {Button} from "@/components/ui/button";
-import {Avatar, AvatarImage, AvatarFallback} from "@/components/ui/avatar";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import {Avatar, AvatarImage, AvatarFallback} from "@/components/ui/avatar";
 import {Link} from "react-router-dom";
+import {Button} from "@/components/ui/button";
 import NatgeoLogo from "../../assets/logo.png";
 
 export function Navbar() {
   return (
-    <nav className="bg-transparent p-4">
+    <nav className="bg-green-900 p-4">
       <div className="container mx-auto flex items-center justify-between">
         <div>
           <img src={NatgeoLogo} alt="Logo" className="h-[6vh] " />

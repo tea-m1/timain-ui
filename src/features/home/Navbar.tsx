@@ -13,13 +13,13 @@ export function Navbar() {
         </div>
         <div className="flex flex-1 justify-center space-x-12 font-bold">
           <Link
-            to="/kiraro"
+            to="/"
             className="text-white transition-all duration-300 hover:text-gray-400"
           >
             Accueil
           </Link>
           <Link
-            to="/kiraro/shop"
+            to="/biodiversite"
             className="text-white transition-all duration-300 hover:text-gray-400"
           >
             Biodiversite

@@ -10,6 +10,8 @@ import {PlantePage} from "./pages/biodiversite/plante/PlantePage";
 import {AnimalPage} from "./pages/biodiversite/animal/AnimalPage";
 import AOS from "aos";
 import PlacePage from "./pages/biodiversite/place/PlacePage";
+import RegisterForm from "./pages/auth/register-form";
+import LoginForm from "./pages/auth/login-form";
 
 AOS.init({
   duration: 1000,
@@ -42,13 +44,13 @@ const ROUTER = createBrowserRouter([
     element: <PlantePage />,
   },
   {
-    path: "/Register",
-    element: <RegisterForm/>,
+    path: "/register",
+    element: <RegisterForm />,
   },
   {
-    path: "/Login",
-    element: <LoginForm/>,
-  }
+    path: "/login",
+    element: <LoginForm />,
+  },
 ]);
 
 const queryClient = new QueryClient();

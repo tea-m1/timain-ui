@@ -20,5 +20,3 @@ export const RegisterSchema = z
     message: "Passwords don't match",
     path: ["confirmPassword"],
   });
-
-

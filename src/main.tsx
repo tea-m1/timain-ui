@@ -41,6 +41,14 @@ const ROUTER = createBrowserRouter([
     path: "/biodiversite/plante",
     element: <PlantePage />,
   },
+  {
+    path: "/Register",
+    element: <RegisterForm/>,
+  },
+  {
+    path: "/Login",
+    element: <LoginForm/>,
+  }
 ]);
 
 const queryClient = new QueryClient();

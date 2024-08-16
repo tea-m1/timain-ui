@@ -1,5 +1,5 @@
 import {Layout} from "@/layout";
-import {CommunityPostList} from "./CommunityPostList";
+import {CommunityPostList} from "./components";
 
 export const Community = () => {
   return (

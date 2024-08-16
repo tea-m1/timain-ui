@@ -1,4 +1,4 @@
-import {CommunityPostCard} from "./CommunityPostCard";
+import {CommunityPostCard} from "./";
 
 export const CommunityPostList = () => {
   return (

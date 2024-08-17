@@ -35,15 +35,15 @@ const ROUTER = createBrowserRouter([
     element: <PlacePage />,
   },
   {
-    path: "/biodiversite/places/:id/",
+    path: "/biodiversite/places/:pid/",
     element: <Biodiversite />,
   },
   {
-    path: "/biodiversite/places/:id/animal",
+    path: "/biodiversite/places/:pid/animal",
     element: <AnimalPage />,
   },
   {
-    path: "/biodiversite/places/:id/plante",
+    path: "/biodiversite/places/:pid/plante",
     element: <PlantePage />,
   },
   {

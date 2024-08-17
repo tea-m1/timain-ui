@@ -17,7 +17,6 @@ export function BioPlanteCard() {
       />
       <CardHeader className="p-2 text-right" style={{marginTop: "-5%"}}>
         <CardTitle className="text-2xl font-bold text-black">Plante</CardTitle>
-        <span className="text-lg">Animle milay io zay fotsiny</span>
       </CardHeader>
     </Card>
   );

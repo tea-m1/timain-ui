@@ -12,7 +12,6 @@ export function BioAnimalCard() {
       <img src={FoxImage} alt="" className="w-[50%] object-cover" />
       <CardHeader className="p-2 text-right">
         <CardTitle className="text-2xl font-bold text-black">Animale</CardTitle>
-        <span className="text-lg">Animle milay io zay fotsiny</span>
       </CardHeader>
     </Card>
   );

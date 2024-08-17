@@ -1,6 +1,7 @@
 import {useQuery} from "@tanstack/react-query";
-import axios from "axios";
 import {PlaceCard} from "./PlaceCard";
+import {placeProvider} from "@/features/admin/providers";
+import {unwrap} from "@/features/admin/providers/api";
 
 interface Place {
   image: string;
@@ -9,11 +10,6 @@ interface Place {
   location: string;
 }
 
-const fetchPlaces = async (): Promise<Place[]> => {
-  const response = await axios.get<{data: Place[]}>("path_to_api_endpoint");
-  return response.data.data;
-};
-
 export function PlaceList() {
   const {
     data: places = [],
@@ -21,15 +17,15 @@ export function PlaceList() {
     isError,
   } = useQuery<Place[]>({
     queryKey: ["places"],
-    queryFn: fetchPlaces,
+    queryFn: async () => {
+       return (await unwrap(() => placeProvider.getList(1, 2)));
+    },
   });
 
+
+  console.log(places);
   if (isLoading) {
     return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error fetching data.</div>;
   }
 
   return (
@@ -38,6 +34,7 @@ export function PlaceList() {
         {places.map((place, index) => (
           <PlaceCard
             key={index}
+            id={place.id}
             image={place.image}
             name={place.name}
             description={place.description}

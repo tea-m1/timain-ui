@@ -1,4 +1,5 @@
-import {RichTextInput} from "@/components/rich-text-input";
+import {useMemo} from "react";
+import {RichTextInput} from "@/components/rich-text-input";;
 import {Label} from "@/components/ui/label";
 import {
   TextInput,
@@ -6,10 +7,17 @@ import {
   Create,
   SimpleForm,
   SelectInput,
+  useGetList,
 } from "react-admin";
 import {makeSelectChoices} from "../../util";
 
 export const SpecieCreate = () => {
+  const {data: places = []} = useGetList("places");
+
+  const placesChoice = useMemo(() => {
+    return places.map(place => ({id: place.id, name: place.name}))
+  }, [places]);
+
   return (
     <Create title="Créer un espèce">
       <SimpleForm>
@@ -27,6 +35,11 @@ export const SpecieCreate = () => {
         <SelectInput
           source="entityType"
           choices={makeSelectChoices(["Animal", "Plant"])}
+        />
+        <SelectInput
+          source="places_id"
+          choices={placesChoice}
+          _optionValue="id"
         />
         <SelectInput
           source="type"

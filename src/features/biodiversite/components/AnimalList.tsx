@@ -1,9 +1,11 @@
 import {useState} from "react";
 import {useQuery} from "@tanstack/react-query";
-import axios from "axios";
 import {AnimalCard} from "./AnimalCard";
 import {Button} from "@/components/ui/button";
 import {ArrowRight} from "lucide-react";
+import { unwrap } from "@/features/admin/providers/api";
+import axios from "axios";
+import {authTokenCache} from "@/features/admin/providers";
 
 interface Animal {
   image: string;
@@ -12,20 +14,26 @@ interface Animal {
   habitat: string;
 }
 
-const fetchAnimals = async (): Promise<Animal[]> => {
-  const response = await axios.get<{data: Animal[]}>("places/:id/animals");
-  return response.data.data;
-};
+export interface AnimalListProps {
+  pid: string;
+}
 
-export function AnimalList() {
+export function AnimalList({pid}: AnimalListProps) {
   const {
     data: animals = [],
     isLoading,
     isError,
-  } = useQuery<Animal[]>({
-    queryKey: ["animals"],
-    queryFn: fetchAnimals,
-  });
+  } = useQuery({
+    queryKey: ["places", pid, "species", "type", "ANIMAL"],
+    queryFn: () => {
+      return unwrap(() => axios.get(`${process.env.API_BASE_URL}/species/places/${pid}/species?type=ANIMAL`, {
+        headers: {
+          Authorization: `Bearer ${authTokenCache.get()?.access_token}`
+        }
+      }
+      ))
+    }
+  })
 
   const [showAll, setShowAll] = useState(false);
 
@@ -33,8 +41,8 @@ export function AnimalList() {
     setShowAll(!showAll);
   };
 
-  const firstSet = animals.slice(0, 3);
-  const secondSet = animals.slice(3);
+  const firstSet = [].slice(0, 3);
+  const secondSet = [].slice(3);
 
   const displayedAnimals = showAll ? secondSet : firstSet;
 

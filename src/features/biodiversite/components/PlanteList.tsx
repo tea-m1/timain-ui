@@ -4,6 +4,9 @@ import axios from "axios";
 import {PlanteCard} from "./PlanteCard";
 import {Button} from "@/components/ui/button";
 import {ArrowRight} from "lucide-react";
+import { useParams } from "react-router-dom";
+import { authTokenCache } from "@/features/admin/providers";
+import { unwrap } from "@/features/admin/providers/api";
 
 interface Plante {
   image: string;
@@ -19,13 +22,26 @@ const fetchPlantes = async (): Promise<Plante[]> => {
 };
 
 export function PlanteList() {
+  const params = useParams();
+  console.log('params', params);
+
+  console.log('pid', pid);
+
   const {
     data: plantes = [],
     isLoading,
     isError,
   } = useQuery<Plante[]>({
-    queryKey: ["plantes"],
-    queryFn: fetchPlantes,
+    queryKey: ["places", pid, "ANIMAL"],
+    queryFn: () => {
+      return unwrap(() => axios.get(() => {
+        return axios.get(`${process.env.API_BASE_URL}/places/${pid}/species?type=ANIMAL`)
+      }), {
+          headers: {
+            Authorization: `Bearer ${authTokenCache.get()?.access_token}`
+          }
+        })
+    },
   });
 
   const [showAll, setShowAll] = useState(false);

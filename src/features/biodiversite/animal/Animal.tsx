@@ -1,7 +1,12 @@
 import {Button} from "@/components/ui/button";
 import {AnimalList} from "../components/AnimalList";
 import {Link} from "react-router-dom";
-export function Animal() {
+
+export interface AnimalProps {
+  pid?: string;
+}
+
+export function Animal({pid}: AnimalProps) {
   return (
     <div className="flex flex-row items-center justify-between p-4 text-white">
       {/* Texte à gauche */}
@@ -20,7 +25,7 @@ export function Animal() {
 
       {/* Card */}
       <div className="mt-2 h-screen w-2/3 flex-shrink-0">
-        <AnimalList />
+        <AnimalList pid={pid} />
       </div>
     </div>
   );

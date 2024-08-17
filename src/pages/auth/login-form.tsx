@@ -44,7 +44,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-r from-[#215048] via-[#557D56] to-[#8FB673]">
       <CardWrapper
         label="Login to your account"
         title="Login"

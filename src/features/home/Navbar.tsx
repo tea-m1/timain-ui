@@ -27,6 +27,29 @@ export function Navbar() {
           >
             Biodiversite
           </Link>
+          <Link
+            to="/community"
+            className="text-white transition-all duration-300 hover:text-gray-400"
+          >
+            Communite
+          </Link>
+        </div>
+        <div>
+          <DropdownMenu.Root>
+            <DropdownMenu.Trigger asChild>
+              <Button variant="ghost" className="p-0 ring-0">
+                <Avatar>
+                  <AvatarImage
+                    src="https://via.placeholder.com/150"
+                    alt="Profile"
+                  />
+                  <AvatarFallback>Profile</AvatarFallback>
+                </Avatar>
+              </Button>
+            </DropdownMenu.Trigger>
+            <DropdownMenu.Content
+              align="end"
+              className="z-[100] rounded-md bg-white p-2 text-black shadow-lg"
           {!!user && (
             <Link
               to="/community"

@@ -1,6 +1,6 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import {Avatar, AvatarImage, AvatarFallback} from "@/components/ui/avatar";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Button} from "@/components/ui/button";
 import Logo from "../../assets/Logo.jpeg";
 import {authProvider} from "../admin/providers/authProvider";
@@ -44,6 +44,12 @@ export function Navbar() {
 }
 
 const AuthenticatedUserMenu = () => {
+  const navigate = useNavigate();
+
+  const doLogout = () => {
+    authProvider.logout(undefined);
+    navigate("/login");
+  }
   return (
     <div className="flex flex-1 justify-end">
       <DropdownMenu.Root>
@@ -66,8 +72,10 @@ const AuthenticatedUserMenu = () => {
             <Link to="/admin">Administration</Link>
           </DropdownMenu.Item>
           <hr />
-          <DropdownMenu.Item className="cursor-pointer rounded-md p-2 hover:bg-gray-200">
-            Logout
+          <DropdownMenu.Item className="cursor-pointer rounded-md p-2 hover:bg-gray-200" onClick={doLogout}>
+            <Button variant="" className="p-0">
+              logout
+            </Button>
           </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Root>

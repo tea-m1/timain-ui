@@ -1,11 +1,17 @@
-import {Datagrid, List, TextField} from "react-admin";
+import {
+  Datagrid,
+  List,
+  ListActions,
+  TextField,
+  RichTextField,
+} from "react-admin";
 
 export const PlaceList = () => {
   return (
-    <List>
+    <List pagination={false} actions={<ListActions hasCreate />}>
       <Datagrid>
         <TextField source="name" />
-        <TextField source="description" />
+        <RichTextField source="description" />
       </Datagrid>
     </List>
   );

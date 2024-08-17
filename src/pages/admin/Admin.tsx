@@ -13,8 +13,8 @@ export const TimainAdmin = () => {
       theme={defaultTheme}
       requireAuth
     >
-      <Resource name="places" {...places} />
-      <Resource name="species" {...species} />
+      <Resource name="places" options={{label: "Espace"}} {...places} />
+      <Resource name="species" options={{label: "Espèce"}} {...species} />
     </Admin>
   );
 };

@@ -12,6 +12,7 @@ export const whoami = async () => {};
 export const authProvider: TimAuthProvider = {
   login: async (userLogin: UserLogin) => {
     const token = await unwrap(() => authenticationApi().login(userLogin));
+    await authProvider.whoami();
     authTokenCache.replace(token as any);
   },
   whoami: async () => {

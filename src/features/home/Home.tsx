@@ -18,18 +18,20 @@ export function Home() {
           Le numérique au service du vivant, des communautés et de
           l’environnement
         </p>
-        <Button
-          className="flex w-52 flex-row rounded-full border border-white bg-transparent p-2 font-bold text-white"
-          type="button"
-        >
-          <span className="flex-1">Participez</span>
 
-          <div className="rounded-full bg-[#F3B840] p-1">
-            <ArrowRight />
-          </div>
-        </Button>
+        <div>
+          <Button
+            className="flex flex-row gap-3 rounded-full border border-white bg-transparent p-4 font-bold text-white"
+            type="button"
+          >
+            <span className="flex-1">Participez</span>
+
+            <div>
+              <ArrowRight className="rounded-full" />
+            </div>
+          </Button>
+        </div>
       </div>
-
       {/* Cercle d'arrière-plan pour la scène 3D */}
       <div className="absolute right-0 h-full w-1/2 rounded-l-[20%] bg-gradient-to-r from-[#D2ECC3] to-[#A3C98D]"></div>
 

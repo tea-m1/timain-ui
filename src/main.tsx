@@ -13,6 +13,8 @@ import PlacePage from "./pages/biodiversite/place/PlacePage";
 import RegisterForm from "./pages/auth/register-form";
 import LoginForm from "./pages/auth/login-form";
 import {TimainAdmin} from "./pages/admin";
+import {authenticated, withRoles} from "@/features/auth";
+import {UserRole} from "./gen";
 
 AOS.init({
   duration: 1000,
@@ -24,10 +26,10 @@ const ROUTER = createBrowserRouter([
     path: "/",
     element: <HomePage />,
   },
-  {
+  authenticated({
     path: "/community",
     element: <Community />,
-  },
+  }),
   {
     path: "/biodiversite/places",
     element: <PlacePage />,
@@ -52,10 +54,13 @@ const ROUTER = createBrowserRouter([
     path: "/login",
     element: <LoginForm />,
   },
-  {
-    path: "/admin/*",
-    element: <TimainAdmin />,
-  },
+  withRoles(
+    {
+      path: "/admin/*",
+      element: <TimainAdmin />,
+    },
+    [UserRole.ADMIN]
+  ),
 ]);
 
 const queryClient = new QueryClient();

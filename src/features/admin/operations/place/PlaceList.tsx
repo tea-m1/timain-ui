@@ -1,9 +1,12 @@
-import {Datagrid, List} from "react-admin";
+import {Datagrid, List, TextField} from "react-admin";
 
 export const PlaceList = () => {
   return (
     <List>
-      <Datagrid></Datagrid>
+      <Datagrid>
+        <TextField source="name" />
+        <TextField source="description" />
+      </Datagrid>
     </List>
   );
 };

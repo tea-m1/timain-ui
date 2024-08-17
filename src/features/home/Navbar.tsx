@@ -38,14 +38,16 @@ export function Navbar() {
 
           {!!user && <AuthenticatedUserMenu />}
         </div>
-        <div className="flex flex-row gap-4">
-          <Button className="bg-[#215048]">
-            <Link to="/login">Se connecter</Link>
-          </Button>
-          <Button className="bg-[#215048]">
-            <Link to="/register">S'inscrire</Link>
-          </Button>
-        </div>
+        {!user && (
+          <div className="flex flex-row gap-4">
+            <Button className="bg-[#215048]">
+              <Link to="/login">Se connecter</Link>
+            </Button>
+            <Button className="bg-[#215048]">
+              <Link to="/register">S'inscrire</Link>
+            </Button>
+          </div>
+        )}
       </div>
     </nav>
   );

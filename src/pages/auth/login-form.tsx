@@ -16,7 +16,7 @@ import {Input} from "../../components/ui/input";
 import {Button} from "../../components/ui/button";
 import {z} from "zod";
 import {authProvider} from "@/features/admin/providers/authProvider";
-import {useMutation, useQuery} from "@tanstack/react-query";
+import {useMutation} from "@tanstack/react-query";
 import {UserLogin} from "@/gen";
 import {useNavigate} from "react-router-dom";
 

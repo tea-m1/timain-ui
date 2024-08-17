@@ -19,21 +19,64 @@ export interface AnimalListProps {
 }
 
 export function AnimalList({pid}: AnimalListProps) {
-  const {
-    data: animals = [],
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["places", pid, "species", "type", "ANIMAL"],
-    queryFn: () => {
-      return unwrap(() => axios.get(`${process.env.API_BASE_URL}/species/places/${pid}/species?type=ANIMAL`, {
-        headers: {
-          Authorization: `Bearer ${authTokenCache.get()?.access_token}`
-        }
-      }
-      ))
-    }
-  })
+  // const {
+  //   data: animals = [],
+  //   isLoading,
+  //   isError,
+  // } = useQuery({
+  //   queryKey: ["places", pid, "species", "type", "ANIMAL"],
+  //   queryFn: () => {
+  //     return unwrap(() => axios.get(`${process.env.API_BASE_URL}/species/places/${pid}/species?type=ANIMAL`, {
+  //       headers: {
+  //         Authorization: `Bearer ${authTokenCache.get()?.access_token}`
+  //       }
+  //     }
+  //     ))
+  //   }
+  // })
+
+
+
+const animals = [
+    {
+      image: "/tiger.jpg",
+      name: "Tiger",
+      description: "A powerful and majestic predator.",
+      habitat: "Forests, grasslands, and wetlands.",
+    },
+    {
+      image: "/elephant.jpg",
+      name: "Elephant",
+      description: "The largest land animal with a strong memory.",
+      habitat: "Savannas, forests, and deserts.",
+    },
+    {
+      image: "/lemur.jpg",
+      name: "Dolphin",
+      description: "Intelligent and friendly marine mammals.",
+      habitat: "Oceans and rivers.",
+    },
+    {
+      image: "/lion.jpg",
+      name: "Lion",
+      description: "The king of the jungle with a powerful roar.",
+      habitat: "Grasslands and savannas.",
+    },
+    {
+      image: "/giraffe.jpg",
+      name: "Giraffe",
+      description: "The tallest land animal with a long neck.",
+      habitat: "Savannas and open woodlands.",
+    },
+    {
+      image: "/zebra.jpg",
+      name: "Zebra",
+      description: "A wild horse with distinctive black-and-white stripes.",
+      habitat: "Grasslands and savannas.",
+    },
+  ];
+
+
 
   const [showAll, setShowAll] = useState(false);
 
@@ -41,18 +84,10 @@ export function AnimalList({pid}: AnimalListProps) {
     setShowAll(!showAll);
   };
 
-  const firstSet = [].slice(0, 3);
-  const secondSet = [].slice(3);
+  const firstSet = animals.slice(0, 3);
+  const secondSet = animals.slice(3);
 
   const displayedAnimals = showAll ? secondSet : firstSet;
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error fetching data.</div>;
-  }
 
   return (
     <div className="relative">

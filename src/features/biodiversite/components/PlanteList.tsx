@@ -25,24 +25,65 @@ export function PlanteList() {
   const params = useParams();
   console.log('params', params);
 
-  console.log('pid', pid);
+  // const {
+  //   data: plantes = [],
+  //   isLoading,
+  //   isError,
+  // } = useQuery<Plante[]>({
+  //   queryKey: ["places", pid, "ANIMAL"],
+  //   queryFn: () => {
+  //     return unwrap(() => axios.get(() => {
+  //       return axios.get(`${process.env.API_BASE_URL}/places/${pid}/species?type=ANIMAL`)
+  //     }), {
+  //         headers: {
+  //           Authorization: `Bearer ${authTokenCache.get()?.access_token}`
+  //         }
+  //       })
+  //   },
+  // });
 
-  const {
-    data: plantes = [],
-    isLoading,
-    isError,
-  } = useQuery<Plante[]>({
-    queryKey: ["places", pid, "ANIMAL"],
-    queryFn: () => {
-      return unwrap(() => axios.get(() => {
-        return axios.get(`${process.env.API_BASE_URL}/places/${pid}/species?type=ANIMAL`)
-      }), {
-          headers: {
-            Authorization: `Bearer ${authTokenCache.get()?.access_token}`
-          }
-        })
+
+const plantes = [
+    {
+      image: "/rose.jpg",
+      name: "Rose",
+      description: "A beautiful flower with thorns and a sweet fragrance.",
+      habitat: "Gardens and wild hedgerows.",
     },
-  });
+    {
+      image: "/sunflower.jpg",
+      name: "Sunflower",
+      description: "Tall plants known for their large, bright yellow flowers.",
+      habitat: "Fields and gardens.",
+    },
+    {
+      image: "/cactus.jpg",
+      name: "Cactus",
+      description:
+        "Plants that thrive in arid environments with spiky defenses.",
+      habitat: "Deserts and dry areas.",
+    },
+    {
+      image: "/orchid.jpg",
+      name: "Orchid",
+      description:
+        "Elegant and exotic flowers that come in a variety of colors.",
+      habitat: "Tropical forests and greenhouses.",
+    },
+    {
+      image: "/bonsai.jpg",
+      name: "Bonsai",
+      description: "Miniature trees cultivated for aesthetic pleasure.",
+      habitat: "Indoor settings and traditional gardens.",
+    },
+    {
+      image: "/lavender.jpg",
+      name: "Lavender",
+      description:
+        "Aromatic plants with soothing properties and purple flowers.",
+      habitat: "Gardens and wild meadows.",
+    },
+  ];
 
   const [showAll, setShowAll] = useState(false);
 
@@ -55,14 +96,6 @@ export function PlanteList() {
   const secondSet = plantes.slice(3);
 
   const displayedPlantes = showAll ? secondSet : firstSet;
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error fetching data.</div>;
-  }
 
   return (
     <div className="relative">

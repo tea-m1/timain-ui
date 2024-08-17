@@ -20,7 +20,7 @@ const CardWrapper = ({
   children,
 }: CardWrapperProps) => {
   return (
-    <Card className="w-full shadow-md md:w-1/2 xl:w-1/4">
+    <Card>
       <CardHeader>
         <AuthHeader label={label} title={title} />
       </CardHeader>

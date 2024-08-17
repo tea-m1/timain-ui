@@ -36,7 +36,7 @@ export function Navbar() {
         <div>
           <DropdownMenu.Root>
             <DropdownMenu.Trigger asChild>
-              <Button variant="ghost" className="p-0">
+              <Button variant="ghost" className="p-0 ring-0">
                 <Avatar>
                   <AvatarImage
                     src="https://via.placeholder.com/150"

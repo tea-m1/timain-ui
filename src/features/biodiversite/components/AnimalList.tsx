@@ -73,7 +73,7 @@ export function AnimalList() {
       </div>
       <div className="absolute right-0 top-1/2 -translate-y-1/2 transform p-4">
         <Button
-          className="rounded-full bg-blue-600 px-4 py-2 text-white"
+          className="rounded-full bg-yellow-600 px-4 py-2 text-white"
           onClick={handleClick}
         >
           <ArrowRight size={24} />

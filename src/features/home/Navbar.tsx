@@ -22,7 +22,7 @@ export function Navbar() {
             Accueil
           </Link>
           <Link
-            to="/biodiversite"
+            to="/biodiversite/places"
             className="text-white transition-all duration-300 hover:text-gray-400"
           >
             Biodiversite

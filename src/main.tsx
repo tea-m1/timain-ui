@@ -29,19 +29,19 @@ const ROUTER = createBrowserRouter([
     element: <Community />,
   },
   {
-    path: "/biodiversite",
+    path: "/biodiversite/places",
     element: <PlacePage />,
   },
   {
-    path: "/biodiversite/alive",
+    path: "/biodiversite/places/:id/",
     element: <Biodiversite />,
   },
   {
-    path: "/biodiversite/animal",
+    path: "/biodiversite/places/:id/animal",
     element: <AnimalPage />,
   },
   {
-    path: "/biodiversite/plante",
+    path: "/biodiversite/places/:id/plante",
     element: <PlantePage />,
   },
   {

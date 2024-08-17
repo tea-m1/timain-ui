@@ -54,6 +54,10 @@ export function Navbar() {
 }
 
 const AuthenticatedUserMenu = () => {
+  const doLogout = () => {
+    authProvider.logout(undefined);
+    window.location.replace("/login");
+  };
   return (
     <div className="flex flex-1 justify-end">
       <DropdownMenu.Root>
@@ -76,8 +80,14 @@ const AuthenticatedUserMenu = () => {
             <Link to="/admin">Administration</Link>
           </DropdownMenu.Item>
           <hr />
-          <DropdownMenu.Item className="cursor-pointer rounded-md p-2 hover:bg-gray-200">
-            Logout
+          <DropdownMenu.Item
+            className="cursor-pointer rounded-md p-2 hover:bg-gray-200"
+            onClick={() => doLogout}
+            asChild
+          >
+            <Button variant="ghost" onClick={doLogout}>
+              Logout
+            </Button>
           </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Root>
